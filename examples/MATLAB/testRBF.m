@@ -55,7 +55,6 @@ Koptions.ltype  = 'L2';     % distance norms for RBF
 
 [A,nr] = generateKernel(x,z,Koptions);   
 
-
 % inversion
 F = @(x) phi(x,mtrue);
 PLSoptions.m0 = 1e6./v0.^2;
@@ -67,7 +66,10 @@ x0 = -1*ones(nr);
 x0(end/2-2:end/2,end/2-2:end/2) = 1;
 x0 = x0(:);
 [~,~,m0] = PLS(x0,F,A,PLSoptions);
-figure(2); imagesc(x,z,reshape(sqrt(1e6./m0),n));colorbar;axis equal tight;title('initial model');
+figure(2); 
+imagesc(x,z,reshape(sqrt(1e6./m0),n));
+colorbar;axis equal tight;
+title('initial model');
 
 
 mFoptions.maxIter = 100;
@@ -77,6 +79,11 @@ xf = QGNewton(fh,x0,mFoptions);
 PLSoptions.kappa = 0;
 [~,~,mf] = PLS(xf,F,A,PLSoptions);
 vf = sqrt(1e6./mf);
-figure(3); imagesc(x,z,reshape(vf,n));colorbar;axis equal tight;title('reconstructed model');
+
+% 
+figure(3); 
+imagesc(x,z,reshape(vf,n));
+colorbar;axis equal tight;
+title('reconstructed model');
 
 

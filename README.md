@@ -1,47 +1,38 @@
-# ParametricLevelSet  
+# Parametric Level Set Framework
 
-An easy-to-use framework of Parametric Level Set approach for inverse problem to improve the reconstructions.
+A comprehensive implementation of the Parametric Level Set approach for inverse problems, aimed at improving reconstruction accuracy.
 
-## Introduction
-**ParametricLevelSet** is a MATLAB toolbox for Parametric Level Set approach in inverse problems.
+## Overview
 
-The classic least-squares formulation of a general inverse problem in written as
+ParametricLevelSet is a MATLAB-based toolkit that employs the Parametric Level Set approach in addressing inverse problems. The framework is designed to be user-friendly and accessible to a wide range of users.
 
+The general least-squares formulation of inverse problems can be expressed as follows:
 
-![Problem formulation][generalPrimalFormulation] ,
+$$\min_{x \in \mathbb{R}^N} \| F(A x) - y \|^2 $$
 
-where ![A](https://latex.codecogs.com/svg.latex?A) denotes a linear operator and
-![F](https://latex.codecogs.com/svg.latex?F) is a proper, convex and lower-semicontinuous function. This Problem refers to the so-called _primal_ formulation of the minimization problem and ![x in R^N](https://latex.codecogs.com/svg.latex?x\in\mathbb{R}^N) is known as the primal variable we are interested in recovering.
+where $A$ is a linear operator and $F$ is a proper, convex and lower-semicontinuous function. This problem represents the so-called primal formulation of the minimization problem, and $x$ is the primal variable of interest that is being recovered.
 
-
-[generalPrimalFormulation]: https://latex.codecogs.com/svg.latex?\min_{x}&space;F(Ax) "Problem formulation"
-[matA]: https://latex.codecogs.com/svg.latex?A "A"
-[funcF]: https://latex.codecogs.com/svg.latex?F" "F"
-
-## Authors
-* Ajinkya Kadu ([a.a.kadu@uu.nl](mailto:a.a.kadu@uu.nl))*
-* Tristan van Leeuwen ([T.vanLeeuwen@uu.nl](mailto:T.vanLeeuwen@uu.nl))*
-
-\*Mathematical Institute, Utrecht University, The Netherlands
 
 ## License
-If you plan to distribute the software (commercially or not), please contact [Ajinkya Kadu](https://ajinkyakadu125.github.io) for more information.
 
-## Dependencies
-This framework has been tested on Matlab 2016b.
+For distribution purposes, commercial or otherwise, please contact [Ajinkya Kadu](https://ajinkyakadu.github.io) for further information.
 
+## Requirements
 
-## Usage
-The examples can be found in test folder.
+The framework has been tested on Matlab 2016b.
 
-## Citation
+## Usage Instructions
 
-If you use this code please use the following citation
+The framework includes examples of usage in the test folder.
+
+## Reference
+
+When using this code, please cite the following publication:
 ```
 @article{Kadu2017,
   doi = {10.1109/tci.2016.2640761},
   url = {https://doi.org/10.1109/tci.2016.2640761},
-  year  = {2017},
+  year = {2017},
   month = {jun},
   publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
   volume = {3},
@@ -54,5 +45,7 @@ If you use this code please use the following citation
 ```
 A preprint of the article can be found [here](https://arxiv.org/pdf/1610.00251.pdf)
 
-## Reporting Bugs
-In case you experience any problems, please contact [Ajinkya Kadu](mailto:a.a.kadu@uu.nl)
+
+## Bug Reports
+
+Should you encounter any issues, please do not hesitate to contact [Ajinkya Kadu](mailto:ajinkyakadu125@gmail.com).
