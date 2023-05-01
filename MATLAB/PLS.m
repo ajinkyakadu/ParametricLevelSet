@@ -44,14 +44,16 @@ kappa = GetOptions(options, 'kappa', 0.1);
 Ax = A*x;
 
 % Calculate the width of the Heaviside function
-options.hopt.epsi = kappa * 0.5 * (max(Ax) - min(Ax));
-[h,d] = HeavisideFunction(Ax,options.hopt);
+hopt.Epsi = kappa * 0.5 * (max(Ax) - min(Ax));
+
+% Compute Heaviside and Dirac-Delta function
+[h, d] = HeavisideFunction(Ax, hopt);
 
 % Calculate the resulting model vector
 m = m0 .* (1 - h) + h * m1;
 
 % Calculate the function value and gradient vector
-[f,g0]  = funObj(m);
+[f, g0]  = funObj(m);
 g = A' * (g0 .* d .* (m1 - m0));
 
 end

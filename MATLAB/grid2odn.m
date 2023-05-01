@@ -1,4 +1,4 @@
-function [grid_centers, grid_spacing, grid_length] = grid2odn(varargin)
+function [grid_centers, grid_spacing, grid_length] = Grid2Odn(varargin)
 % GRID2ODN computes grid information for writing .odn files.
 %
 % Summary: % The function grid2odn takes in a set of grids, described as 1D

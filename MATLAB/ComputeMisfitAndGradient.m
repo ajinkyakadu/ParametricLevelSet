@@ -20,7 +20,8 @@ function [FunctionValue, GradientValue] = ComputeMisfitAndGradient(ModelVector, 
 % Date: September 2016
 
 residual      = ModelVector - ObservedData;
-FunctionValue = 0.5 * norm(residual)^2;
-GradientValue = residual;
+residualLength= length(residual);
+FunctionValue = 0.5 * norm(residual)^2/residualLength;
+GradientValue = residual/residualLength;
 
 end

@@ -34,7 +34,7 @@ fid       = GetOptions(options, 'fid', 1);
 itermax   = GetOptions(options, 'maxIter', 10);
 tol       = GetOptions(options, 'optTol', 1e-6);
 write     = GetOptions(options, 'write', 0);
-init_step = GetOptions(options, 'init_step', 0);
+init_step = GetOptions(options, 'init_step', 1);
 
 % Initialize variables.
 n = length(x0);
@@ -73,13 +73,14 @@ while ~converged
     % update
     xt = x + lambda*s;
 
-    S = [S xt - x];
-    Y = [Y gt - g];
+    S = [S (xt - x)];
+    Y = [Y (gt - g)];
 
-    if size(S,2)>M
+    if (size(S,2) > M)
         S = S(:,end-M+1:end);
         Y = Y(:,end-M+1:end);
     end
+
     f = ft;
     g = gt;
     x = xt;
@@ -92,7 +93,7 @@ while ~converged
     end
 
     % check convergence
-    converged = (iter>itermax)||(norm(g)<tol)||(lambda<tol);
+    converged = (iter > itermax) || (norm(g) < tol) || (lambda < tol);
 
 end
 
@@ -144,7 +145,7 @@ z = a * q;
 
 % Perform the second recursion.
 for k = 1:M
-    beta = rho(k) * Y(:, k)' * z;
+    beta = rho(k) * (Y(:, k)' * z);
     z = z + (alpha(k) - beta) * S(:, k);
 end
 
@@ -159,7 +160,7 @@ function [ft,gt,lambda,lsiter] = WolfeLineSearch(FunctionHandle, ...
 % adapted from the source 
 % (http://cs.nyu.edu/overton/mstheses/skajaa/msthesis.pdf, Algorithm 3).
 
-lsiter                = 0;
+lsiter               = 0;
 FirstConstant        = 1e-2;
 SecondConstant       = 0.9;
 TerminationIndicator = false;
@@ -181,7 +182,7 @@ while ~TerminationIndicator
 
     if lsiter < 10
         [ft,gt] = FunctionHandle(InitialGuess + ...
-            CurrentLambda * SearchDirection);
+            (CurrentLambda * SearchDirection));
         lsiter = lsiter + 1;
     else
         CurrentLambda = 0;

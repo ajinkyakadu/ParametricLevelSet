@@ -1,4 +1,4 @@
-function [Heaviside,Delta] = HeavisideFunction(InputVector,Options)
+function [Heaviside, Delta] = HeavisideFunction(InputVector, Options)
 % HeavisideFunction - A function that calculates the Heaviside
 % (approximated) and its derivative Delta on a given input vector
 %
@@ -35,25 +35,28 @@ if nargin<2
     Options = [];
 end
 
-Type = GetOptions(Options,'Type','compact');
-Epsi = GetOptions(Options,'Epsi',0.1);
-Thr  = GetOptions(Options,'Thr',0);
+Type = GetOptions(Options, 'Type', 'compact');
+Epsi = GetOptions(Options, 'Epsi', 0.1);
+Thr  = GetOptions(Options, 'Thr', 0);
 
 InputVector = InputVector - Thr;
 
 switch Type
 
     case 'global'
-        Heaviside = 0.5*(1 + 2/piatan(piInputVector/Epsi));
-        Delta = 1./(Epsi*((InputVector.^2*pi^2)/Epsi^2 + 1));
+        Heaviside = 0.5*(1 + (2/pi)*atan(pi*InputVector/Epsi));
+        Delta     = 1./(Epsi*((InputVector*pi).^2/Epsi^2 + 1));
 
     case 'compact'
         Heaviside = 0*InputVector;
-        Delta = 0*InputVector;
-        id = find((InputVector < Epsi) & (InputVector > -Epsi));
-        Heaviside(id) = 0.5*(1 + InputVector(id)/Epsi + 1/pi*sin(pi*InputVector(id)/Epsi));
+        Delta     = 0*InputVector;
+
+        id = find(abs(InputVector) < Epsi);
+
+        Heaviside(id) = 0.5*(1 + InputVector(id)/Epsi + (1/pi) * sin(pi*InputVector(id)/Epsi));
         Heaviside(InputVector >= Epsi) = 1;
         Heaviside(InputVector <=-Epsi) = 0;
+
         Delta(id) = 0.5*(1/Epsi)*(1 + cos(pi*InputVector(id)/Epsi));
 end
 
